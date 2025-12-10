@@ -1,0 +1,276 @@
+name: Capture
+version: '${project.version}'
+main: org.achymake.capture.Capture
+api-version: '1.21'
+prefix: '${project.name}'
+load: STARTUP
+author: AchyMake
+description: '${project.description}'
+website: '${project.url}'
+commands:
+  capture:
+    description: capture command
+    permission: capture.command.capture
+    permission-message: You are do not have the permission to execute the command
+    usage: /help
+permissions:
+  capture.command.capture:
+    description: capture command
+    default: op
+  capture.event.capture:
+    description: allows to capture all entity
+    default: op
+    children:
+      - capture.event.capture.*
+  capture.event.capture.allay:
+    description: allows to capture allay
+    default: op
+  capture.event.capture.armadillo:
+    description: allows to capture armadillo
+    default: op
+  capture.event.capture.axolotl:
+    description: allows to capture axolotl
+    default: op
+  capture.event.capture.bat:
+    description: allows to capture bat
+    default: op
+  capture.event.capture.bee:
+    description: allows to capture bee
+    default: op
+  capture.event.capture.blaze:
+    description: allows to capture blaze
+    default: op
+  capture.event.capture.bogged:
+    description: allows to capture bogged
+    default: op
+  capture.event.capture.breeze:
+    description: allows to capture breeze
+    default: op
+  capture.event.capture.camel:
+    description: allows to capture camel
+    default: op
+  capture.event.capture.cat:
+    description: allows to capture cat
+    default: op
+  capture.event.capture.cave_spider:
+    description: allows to capture cave spider
+    default: op
+  capture.event.capture.chicken:
+    description: allows to capture chicken
+    default: op
+  capture.event.capture.cod:
+    description: allows to capture cod
+    default: op
+  capture.event.capture.copper_golem:
+    description: allows to capture copper_golem
+    default: op
+  capture.event.capture.cow:
+    description: allows to capture cow
+    default: op
+  capture.event.capture.creeper:
+    description: allows to capture creeper
+    default: op
+  capture.event.capture.dolphin:
+    description: allows to capture dolphin
+    default: op
+  capture.event.capture.donkey:
+    description: allows to capture donkey
+    default: op
+  capture.event.capture.drowned:
+    description: allows to capture drowned
+    default: op
+  capture.event.capture.elder_guardian:
+    description: allows to capture elder guardian
+    default: op
+  capture.event.capture.ender_dragon:
+    description: allows to capture ender dragon
+    default: op
+  capture.event.capture.enderman:
+    description: allows to capture enderman
+    default: op
+  capture.event.capture.endermite:
+    description: allows to capture endermite
+    default: op
+  capture.event.capture.evoker:
+    description: allows to capture evoker
+    default: op
+  capture.event.capture.fox:
+    description: allows to capture fox
+    default: op
+  capture.event.capture.frog:
+    description: allows to capture frog
+    default: op
+  capture.event.capture.ghast:
+    description: allows to capture ghast
+    default: op
+  capture.event.capture.giant:
+    description: allows to capture giant
+    default: op
+  capture.event.capture.glow_squid:
+    description: allows to capture glow squid
+    default: op
+  capture.event.capture.goat:
+    description: allows to capture goat
+    default: op
+  capture.event.capture.guardian:
+    description: allows to capture guardian
+    default: op
+  capture.event.capture.hoglin:
+    description: allows to capture hoglin
+    default: op
+  capture.event.capture.horse:
+    description: allows to capture horse
+    default: op
+  capture.event.capture.husk:
+    description: allows to capture husk
+    default: op
+  capture.event.capture.illusioner:
+    description: allows to capture illusioner
+    default: op
+  capture.event.capture.iron_golem:
+    description: allows to capture iron golem
+    default: op
+  capture.event.capture.llama:
+    description: allows to capture llama
+    default: op
+  capture.event.capture.magma_cube:
+    description: allows to capture magma cube
+    default: op
+  capture.event.capture.mooshroom:
+    description: allows to capture mooshroom
+    default: op
+  capture.event.capture.mule:
+    description: allows to capture mule
+    default: op
+  capture.event.capture.ocelot:
+    description: allows to capture ocelot
+    default: op
+  capture.event.capture.panda:
+    description: allows to capture panda
+    default: op
+  capture.event.capture.parrot:
+    description: allows to capture parrot
+    default: op
+  capture.event.capture.phantom:
+    description: allows to capture phantom
+    default: op
+  capture.event.capture.pig:
+    description: allows to capture pig
+    default: op
+  capture.event.capture.piglin:
+    description: allows to capture piglin
+    default: op
+  capture.event.capture.piglin_brute:
+    description: allows to capture piglin brute
+    default: op
+  capture.event.capture.pillager:
+    description: allows to capture pillager
+    default: op
+  capture.event.capture.polar_bear:
+    description: allows to capture polar bear
+    default: op
+  capture.event.capture.pufferfish:
+    description: allows to capture pufferfish
+    default: op
+  capture.event.capture.rabbit:
+    description: allows to capture rabbit
+    default: op
+  capture.event.capture.ravager:
+    description: allows to capture ravager
+    default: op
+  capture.event.capture.salmon:
+    description: allows to capture salmon
+    default: op
+  capture.event.capture.sheep:
+    description: allows to capture sheep
+    default: op
+  capture.event.capture.shulker:
+    description: allows to capture shulker
+    default: op
+  capture.event.capture.silverfish:
+    description: allows to capture silverfish
+    default: op
+  capture.event.capture.skeleton:
+    description: allows to capture skeleton
+    default: op
+  capture.event.capture.skeleton_horse:
+    description: allows to capture skeleton horse
+    default: op
+  capture.event.capture.slime:
+    description: allows to capture slime
+    default: op
+  capture.event.capture.sniffer:
+    description: allows to capture sniffer
+    default: op
+  capture.event.capture.snow_golem:
+    description: allows to capture snow golem
+    default: op
+  capture.event.capture.spider:
+    description: allows to capture spider
+    default: op
+  capture.event.capture.squid:
+    description: allows to capture squid
+    default: op
+  capture.event.capture.stray:
+    description: allows to capture stray
+    default: op
+  capture.event.capture.strider:
+    description: allows to capture strider
+    default: op
+  capture.event.capture.tadpole:
+    description: allows to capture tadpole
+    default: op
+  capture.event.capture.trader_llama:
+    description: allows to capture trader llama
+    default: op
+  capture.event.capture.tropical_fish:
+    description: allows to capture tropical fish
+    default: op
+  capture.event.capture.turtle:
+    description: allows to capture turtle
+    default: op
+  capture.event.capture.vex:
+    description: allows to capture vex
+    default: op
+  capture.event.capture.villager:
+    description: allows to capture villager
+    default: op
+  capture.event.capture.vindicator:
+    description: allows to capture vindicator
+    default: op
+  capture.event.capture.wandering_trader:
+    description: allows to capture wandering trader
+    default: op
+  capture.event.capture.warden:
+    description: allows to capture warden
+    default: op
+  capture.event.capture.witch:
+    description: allows to capture witch
+    default: op
+  capture.event.capture.wither:
+    description: allows to capture wither
+    default: op
+  capture.event.capture.wither_skeleton:
+    description: allows to capture wither skeleton
+    default: op
+  capture.event.capture.wolf:
+    description: allows to capture wolf
+    default: op
+  capture.event.capture.zoglin:
+    description: allows to capture zoglin
+    default: op
+  capture.event.capture.zombie:
+    description: allows to capture zombie
+    default: op
+  capture.event.capture.zombie_horse:
+    description: allows to capture zombie horse
+    default: op
+  capture.event.capture.zombie_villager:
+    description: allows to capture zombie villager
+    default: op
+  capture.event.capture.zombified_piglin:
+    description: allows to capture zombified piglin
+    default: op
+  capture.event.join.update:
+    description: capture command
+    default: op
