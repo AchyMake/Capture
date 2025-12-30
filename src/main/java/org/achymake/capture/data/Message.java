@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 
 public class Message {
@@ -23,6 +24,9 @@ public class Message {
     }
     public String get(String path, String... format) {
         return config.isString(path) ? addColor(MessageFormat.format(config.getString(path), format)) : path + ": is missing a value";
+    }
+    public String getFormatted(double value) {
+        return new DecimalFormat("#,##0.00").format(value);
     }
     private void setup() {
         config.options().copyDefaults(true);

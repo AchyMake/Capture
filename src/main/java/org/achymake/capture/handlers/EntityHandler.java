@@ -1,6 +1,8 @@
 package org.achymake.capture.handlers;
 
 import org.achymake.capture.Capture;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Entity;
@@ -31,5 +33,15 @@ public class EntityHandler {
                 return tameable.getOwner();
             } else return null;
         } else return null;
+    }
+    public AttributeInstance getAttribute(Entity entity, Attribute attribute) {
+        if (entity instanceof LivingEntity livingEntity) {
+            return livingEntity.getAttribute(attribute);
+        } else return null;
+    }
+    public double getHealth(Entity entity) {
+        if (entity instanceof LivingEntity livingEntity) {
+            return livingEntity.getHealth();
+        } else return 0.0;
     }
 }

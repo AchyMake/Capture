@@ -5,7 +5,11 @@ worlds:
   - world_nether
   - world_the_end
   - test
-spawn-egg-lore: '&9Name:&f {entity}'
+spawn-egg-lore:
+  - '&9Stats'
+  - '&9Name:&f {entity}'
+  - '&9Health:&f {health}'
+  - '&9Scale:&f {scale}'
 item:
   type: LEAD
   enchantment: none

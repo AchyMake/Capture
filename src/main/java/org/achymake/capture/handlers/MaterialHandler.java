@@ -1,7 +1,11 @@
 package org.achymake.capture.handlers;
 
 import org.achymake.capture.Capture;
+import org.achymake.capture.data.Message;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
@@ -13,6 +17,18 @@ import java.util.ArrayList;
 public class MaterialHandler {
     private Capture getInstance() {
         return Capture.getInstance();
+    }
+    private FileConfiguration getConfig() {
+        return getInstance().getConfig();
+    }
+    private EntityHandler getEntityHandler() {
+        return getInstance().getEntityHandler();
+    }
+    private Message getMessage() {
+        return getInstance().getMessage();
+    }
+    private NamespacedKey getNamespacedKey(String key) {
+        return getInstance().getNamespacedKey(key);
     }
     public Material get(String materialName) {
         return Material.valueOf(materialName.toUpperCase());
@@ -29,7 +45,7 @@ public class MaterialHandler {
     public boolean isPickedUp(ItemStack itemStack) {
         var meta = itemStack.getItemMeta();
         if (meta != null) {
-            return meta.getPersistentDataContainer().has(getInstance().getNamespacedKey("carry"));
+            return meta.getPersistentDataContainer().has(getNamespacedKey("carry"));
         } else return false;
     }
     public ItemStack toSpawnEgg(Entity entity) {
@@ -37,20 +53,26 @@ public class MaterialHandler {
         var eggMeta = (SpawnEggMeta) egg.getItemMeta();
         if (eggMeta != null) {
             eggMeta.setSpawnedEntity(entity.createSnapshot());
-            eggMeta.getPersistentDataContainer().set(getInstance().getNamespacedKey("carry"), PersistentDataType.BOOLEAN, true);
+            eggMeta.getPersistentDataContainer().set(getNamespacedKey("carry"), PersistentDataType.BOOLEAN, true);
             var list = new ArrayList<String>();
-            var lore = getInstance().getConfig().getString("spawn-egg-lore").replace("{entity}", getInstance().getEntityHandler().getName(entity));
-            list.add(getInstance().getMessage().addColor(lore));
+            for (var lore : getConfig().getStringList("spawn-egg-lore")) {
+                lore
+                        .replace("{entity}", getEntityHandler().getName(entity))
+                        .replace("{scale}", getMessage().getFormatted(getEntityHandler().getAttribute(entity, Attribute.GENERIC_SCALE).getBaseValue()))
+                        .replace("{health}", getMessage().getFormatted(getEntityHandler().getHealth(entity)));
+                list.add(getMessage().addColor(lore));
+
+            }
             eggMeta.setLore(list);
             egg.setItemMeta(eggMeta);
             return egg;
         } else return null;
     }
     public boolean isItem(ItemStack itemStack) {
-        return itemStack.getType().equals(get(getInstance().getConfig().getString("item.type"))) && hasEnchantment(itemStack);
+        return itemStack.getType().equals(get(getConfig().getString("item.type"))) && hasEnchantment(itemStack);
     }
     public boolean hasEnchantment(ItemStack itemStack) {
-        var enchantment = getInstance().getConfig().getString("item.enchantment");
+        var enchantment = getConfig().getString("item.enchantment");
         if (enchantment.equalsIgnoreCase("none")) {
             return true;
         } else return itemStack.getItemMeta().hasEnchant(Enchantment.getByName(enchantment));
