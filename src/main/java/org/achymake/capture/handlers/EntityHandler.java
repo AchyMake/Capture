@@ -73,7 +73,7 @@ public class EntityHandler {
             case Donkey donkey -> getMessage().toTitleCase(donkey.getVariant().name());
             case Llama llama -> getMessage().toTitleCase(llama.getVariant().name());
             case Parrot parrot -> getMessage().toTitleCase(parrot.getVariant().name());
-            case Wolf wolf -> getMessage().toTitleCase(wolf.getVariant().toString());
+            case Wolf wolf -> getMessage().toTitleCase(wolf.getVariant().getKey().getKey());
             case Mule mule -> getMessage().toTitleCase(mule.getVariant().name());
             case Horse horse -> getMessage().toTitleCase(horse.getVariant().name());
             case SkeletonHorse skeletonHorse -> getMessage().toTitleCase(skeletonHorse.getVariant().name());
