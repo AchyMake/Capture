@@ -4,7 +4,6 @@ import org.achymake.capture.Capture;
 import org.achymake.capture.data.Message;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
@@ -50,22 +49,26 @@ public class MaterialHandler {
     }
     public ItemStack toSpawnEgg(Entity entity) {
         var egg = getItemStack(entity.getType() + "_spawn_egg", 1);
-        var eggMeta = (SpawnEggMeta) egg.getItemMeta();
-        if (eggMeta != null) {
-            eggMeta.setSpawnedEntity(entity.createSnapshot());
-            eggMeta.getPersistentDataContainer().set(getNamespacedKey("carry"), PersistentDataType.BOOLEAN, true);
-            var list = new ArrayList<String>();
-            for (var lore : getConfig().getStringList("spawn-egg-lore")) {
-                lore
-                        .replace("{entity}", getEntityHandler().getName(entity))
-                        .replace("{scale}", getMessage().getFormatted(getEntityHandler().getAttribute(entity, Attribute.GENERIC_SCALE).getBaseValue()))
-                        .replace("{health}", getMessage().getFormatted(getEntityHandler().getHealth(entity)));
-                list.add(getMessage().addColor(lore));
-
-            }
-            eggMeta.setLore(list);
-            egg.setItemMeta(eggMeta);
-            return egg;
+        if (egg != null) {
+            var eggMeta = (SpawnEggMeta) egg.getItemMeta();
+            if (eggMeta != null) {
+                eggMeta.setSpawnedEntity(entity.createSnapshot());
+                eggMeta.getPersistentDataContainer().set(getNamespacedKey("carry"), PersistentDataType.BOOLEAN, true);
+                var name = getEntityHandler().getName(entity);
+                var health = getMessage().getFormatted(getEntityHandler().getHealth(entity));
+                var scale = getMessage().getFormatted(getEntityHandler().getScale(entity));
+                var stringList = new ArrayList<String>();
+                stringList.add(getMessage().addColor("&9Name&f: " + name));
+                stringList.add(getMessage().addColor("&9Health&f: " + health));
+                stringList.add(getMessage().addColor("&9Scale&f: " + scale));
+                var profession = getEntityHandler().getProfession(entity);
+                if (profession != null) {
+                    stringList.add(getMessage().addColor("&9Profession&f: " + getMessage().toTitleCase(profession)));
+                }
+                eggMeta.setLore(stringList);
+                egg.setItemMeta(eggMeta);
+                return egg;
+            } else return null;
         } else return null;
     }
     public boolean isItem(ItemStack itemStack) {

@@ -12,6 +12,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.plugin.PluginManager;
 
+import java.util.Objects;
+
 public class PlayerInteractEntity implements Listener {
     private Capture getInstance() {
         return Capture.getInstance();
@@ -36,9 +38,6 @@ public class PlayerInteractEntity implements Listener {
         var player = event.getPlayer();
         var mainHand = player.getInventory().getItemInMainHand();
         var offHand = player.getInventory().getItemInOffHand();
-        if (getMaterials().isItem(mainHand) || getMaterials().isItem(offHand)) {
-            event.setCancelled(true);
-        }
         if (getMaterials().isPickedUp(mainHand) || getMaterials().isPickedUp(offHand)) {
             event.setCancelled(true);
         } else {
@@ -54,9 +53,13 @@ public class PlayerInteractEntity implements Listener {
             if (getEntityHandler().isLeashed(entity))return;
             if (!getMaterials().isItem(mainHand))return;
             if (!getMaterials().isAir(offHand))return;
-            event.setCancelled(true);
-            getPluginManager().callEvent(new PlayerPickEntityEvent(player, entity));
-            player.setCooldown(mainHand.getType(), 20);
+            var owner = getEntityHandler().getOwner(entity);
+            if (owner == null || owner == player) {
+                event.setCancelled(true);
+                getPluginManager().callEvent(new PlayerPickEntityEvent(player, entity));
+            } else player.sendMessage(getInstance().getMessage().get("error.entity.tamed")
+                    .replace("{entity}", getEntityHandler().getName(entity))
+                    .replace("{owner}", Objects.requireNonNullElse(owner.getName(), "Null")));
         }
     }
 }

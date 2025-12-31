@@ -2,12 +2,8 @@ package org.achymake.capture.handlers;
 
 import org.achymake.capture.Capture;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.AnimalTamer;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Tameable;
+import org.bukkit.entity.*;
 
 public class EntityHandler {
     private Capture getInstance() {
@@ -34,14 +30,22 @@ public class EntityHandler {
             } else return null;
         } else return null;
     }
-    public AttributeInstance getAttribute(Entity entity, Attribute attribute) {
+    public double getScale(Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
-            return livingEntity.getAttribute(attribute);
-        } else return null;
+            var scale = livingEntity.getAttribute(Attribute.GENERIC_SCALE);
+            if (scale != null) {
+                return scale.getBaseValue();
+            } else return 1.0;
+        } else return 1.0;
     }
     public double getHealth(Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
             return livingEntity.getHealth();
         } else return 0.0;
+    }
+    public String getProfession(Entity entity) {
+        if (entity instanceof Villager villager) {
+            return villager.getProfession().name();
+        } else return null;
     }
 }

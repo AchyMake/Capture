@@ -25,13 +25,13 @@ public class PlayerInteract implements Listener {
     }
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerInteract(PlayerInteractEvent event) {
-        var player = event.getPlayer();
-        var mainHand = player.getInventory().getItemInMainHand();
-        var offHand = player.getInventory().getItemInOffHand();
         if (event.getAction().equals(Action.LEFT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             var block = event.getClickedBlock();
             if (block == null)return;
             if (block.getState() instanceof CreatureSpawner) {
+                var player = event.getPlayer();
+                var mainHand = player.getInventory().getItemInMainHand();
+                var offHand = player.getInventory().getItemInOffHand();
                 if (getMaterials().isPickedUp(mainHand) || getMaterials().isPickedUp(offHand)) {
                     event.setCancelled(true);
                 }

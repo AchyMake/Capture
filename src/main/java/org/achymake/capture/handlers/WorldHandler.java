@@ -31,8 +31,9 @@ public class WorldHandler {
     public boolean isAllowedCarry(Location location) {
         var world = location.getWorld();
         if (world != null) {
-            if (getConfig().getStringList("worlds").contains(world.getName())) {
-                var regionManager = WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(world));
+            var worldName = world.getName();
+            if (getConfig().getStringList("worlds").contains(worldName)) {
+                var regionManager = getWorldGuard().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(world));
                 if (regionManager != null) {
                     var x = location.getX();
                     var y = location.getY();
@@ -43,5 +44,8 @@ public class WorldHandler {
                 } else return true;
             } else return false;
         } else return false;
+    }
+    private WorldGuard getWorldGuard() {
+        return WorldGuard.getInstance();
     }
 }

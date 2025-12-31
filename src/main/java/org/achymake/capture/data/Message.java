@@ -1,12 +1,9 @@
 package org.achymake.capture.data;
 
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.achymake.capture.Capture;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,9 +38,6 @@ public class Message {
         if (file.exists()) {
             config = YamlConfiguration.loadConfiguration(file);
         } else setup();
-    }
-    public void sendActionBar(Player player, String message) {
-        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(addColor(message)));
     }
     public String addColor(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);
