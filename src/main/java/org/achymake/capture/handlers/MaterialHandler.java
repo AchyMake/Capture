@@ -65,6 +65,14 @@ public class MaterialHandler {
                 if (profession != null) {
                     stringList.add(getMessage().addColor("&9Profession&f: " + getMessage().toTitleCase(profession)));
                 }
+                var jumpStrength = getEntityHandler().getJumpStrength(entity);
+                if (jumpStrength != null) {
+                    stringList.add(getMessage().addColor("&9Jump Strength&f: " + jumpStrength));
+                }
+                var color = getEntityHandler().getColor(entity);
+                if (color != null) {
+                    stringList.add(getMessage().addColor("&9Color&f: " + color));
+                }
                 eggMeta.setLore(stringList);
                 egg.setItemMeta(eggMeta);
                 return egg;
