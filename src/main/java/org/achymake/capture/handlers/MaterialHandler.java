@@ -30,7 +30,7 @@ public class MaterialHandler {
         return getInstance().getNamespacedKey(key);
     }
     public Material get(String materialName) {
-        return Material.valueOf(materialName.toUpperCase());
+        return Material.getMaterial(materialName.toUpperCase());
     }
     public ItemStack getItemStack(String materialName, int amount) {
         var material = get(materialName);
@@ -39,7 +39,7 @@ public class MaterialHandler {
         } else return null;
     }
     public boolean isAir(ItemStack itemStack) {
-        return itemStack == null || itemStack.getType().equals(this.get("air"));
+        return itemStack == null || itemStack.getType().equals(get("air"));
     }
     public boolean isPickedUp(ItemStack itemStack) {
         var meta = itemStack.getItemMeta();
