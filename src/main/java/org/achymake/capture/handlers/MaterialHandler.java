@@ -55,12 +55,16 @@ public class MaterialHandler {
                 eggMeta.setSpawnedEntity(entity.createSnapshot());
                 eggMeta.getPersistentDataContainer().set(getNamespacedKey("carry"), PersistentDataType.BOOLEAN, true);
                 var name = getEntityHandler().getName(entity);
-                var health = getMessage().getFormatted(getEntityHandler().getHealth(entity));
-                var scale = getMessage().getFormatted(getEntityHandler().getScale(entity));
                 var stringList = new ArrayList<String>();
                 stringList.add(getMessage().addColor("&9Name&f: " + name));
-                stringList.add(getMessage().addColor("&9Health&f: " + health));
-                stringList.add(getMessage().addColor("&9Scale&f: " + scale));
+                var health = getEntityHandler().getHealth(entity);
+                if (health != null) {
+                    stringList.add(getMessage().addColor("&9Health&f: " + health));
+                }
+                var scale = getEntityHandler().getScale(entity);
+                if (scale != null) {
+                    stringList.add(getMessage().addColor("&9Scale&f: " + scale));
+                }
                 var profession = getEntityHandler().getProfession(entity);
                 if (profession != null) {
                     stringList.add(getMessage().addColor("&9Profession&f: " + getMessage().toTitleCase(profession)));

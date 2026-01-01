@@ -34,18 +34,18 @@ public class EntityHandler {
             } else return null;
         } else return null;
     }
-    public double getScale(Entity entity) {
+    public String getScale(Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
-            var scale = livingEntity.getAttribute(Attribute.SCALE);
+            var scale = livingEntity.getAttribute(Attribute.GENERIC_SCALE);
             if (scale != null) {
-                return scale.getBaseValue();
-            } else return 1.0;
-        } else return 1.0;
+                return getMessage().getFormatted(scale.getBaseValue());
+            } else return null;
+        } else return null;
     }
-    public double getHealth(Entity entity) {
+    public String getHealth(Entity entity) {
         if (entity instanceof LivingEntity livingEntity) {
-            return livingEntity.getHealth();
-        } else return 0.0;
+            return getMessage().getFormatted(livingEntity.getHealth());
+        } else return null;
     }
     public String getProfession(Entity entity) {
         if (entity instanceof Villager villager) {
@@ -53,16 +53,9 @@ public class EntityHandler {
         } else return null;
     }
     public String getJumpStrength(Entity entity) {
-        return switch (entity) {
-            case CamelHusk camelHusk -> getMessage().getFormatted(camelHusk.getJumpStrength());
-            case Camel camel -> getMessage().getFormatted(camel.getJumpStrength());
-            case Donkey donkey -> getMessage().getFormatted(donkey.getJumpStrength());
-            case Mule mule -> getMessage().getFormatted(mule.getJumpStrength());
-            case Horse horse -> getMessage().getFormatted(horse.getJumpStrength());
-            case SkeletonHorse skeletonHorse -> getMessage().getFormatted(skeletonHorse.getJumpStrength());
-            case ZombieHorse zombieHorse -> getMessage().getFormatted(zombieHorse.getJumpStrength());
-            case null, default -> null;
-        };
+        if (entity instanceof AbstractHorse abstractHorse) {
+            return getMessage().getFormatted(abstractHorse.getJumpStrength());
+        } else return null;
     }
     public String getColor(Entity entity) {
         return switch (entity) {
