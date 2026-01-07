@@ -61,6 +61,7 @@ public final class Capture extends JavaPlugin {
         new PlayerInteract();
         new PlayerInteractEntity();
         new PlayerJoin();
+        new PlayerLeashEntity();
         new PlayerPickEntity();
     }
     public void reload() {
@@ -97,6 +98,9 @@ public final class Capture extends JavaPlugin {
     public static Capture getInstance() {
         return instance;
     }
+    public NamespacedKey getNamespacedKey(String key) {
+        return new NamespacedKey(this, key);
+    }
     public void sendInfo(String message) {
         getLogger().info(message);
     }
@@ -114,9 +118,6 @@ public final class Capture extends JavaPlugin {
     }
     public String getMinecraftProvider() {
         return getServer().getName();
-    }
-    public NamespacedKey getNamespacedKey(String key) {
-        return new NamespacedKey(this, key);
     }
     public WorldGuard getWorldGuard() {
         return WorldGuard.getInstance();

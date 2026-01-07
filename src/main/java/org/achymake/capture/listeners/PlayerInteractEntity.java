@@ -41,18 +41,18 @@ public class PlayerInteractEntity implements Listener {
         if (getMaterials().isPickedUp(mainHand) || getMaterials().isPickedUp(offHand)) {
             event.setCancelled(true);
         } else {
-            var entity = event.getRightClicked();
+            if (!getMaterials().isCaptureItemStack(mainHand))return;
+            if (!getMaterials().isAir(offHand))return;
             if (!player.isSneaking())return;
-            if (entity instanceof Player)return;
+            var entity = event.getRightClicked();
             if (!getEntityHandler().isEnable(entity))return;
             if (!player.hasPermission("capture.event.capture." + entity.getType().toString().toLowerCase()))return;
-            if (player.hasCooldown(mainHand.getType()))return;
-            if (entity.isInvulnerable())return;
-            if (entity.isInsideVehicle())return;
             if (!getWorldHandler().isAllowedCarry(entity.getLocation()))return;
+            if (player.hasCooldown(mainHand.getType()))return;
+            if (entity instanceof Player)return;
             if (getEntityHandler().isLeashed(entity))return;
-            if (!getMaterials().isItem(mainHand))return;
-            if (!getMaterials().isAir(offHand))return;
+            if (entity.isInsideVehicle())return;
+            if (entity.isInvulnerable())return;
             var owner = getEntityHandler().getOwner(entity);
             if (owner == null || owner == player) {
                 event.setCancelled(true);

@@ -83,13 +83,17 @@ public class MaterialHandler {
             } else return null;
         } else return null;
     }
-    public boolean isItem(ItemStack itemStack) {
-        return itemStack.getType().equals(get(getConfig().getString("item.type"))) && hasEnchantment(itemStack);
+    public boolean isCaptureItemStack(ItemStack itemStack) {
+        if (itemStack != null) {
+            return itemStack.getType().equals(get(getConfig().getString("item.type"))) && hasEnchantment(itemStack);
+        } else return false;
     }
     public boolean hasEnchantment(ItemStack itemStack) {
-        var enchantment = getConfig().getString("item.enchantment");
-        if (enchantment.equalsIgnoreCase("none")) {
-            return true;
-        } else return itemStack.getItemMeta().hasEnchant(Enchantment.getByName(enchantment));
+        if (itemStack != null) {
+            var enchantment = getConfig().getString("item.enchantment");
+            if (enchantment.equalsIgnoreCase("none")) {
+                return true;
+            } else return itemStack.getItemMeta().hasEnchant(Enchantment.getByName(enchantment));
+        } else return false;
     }
 }
