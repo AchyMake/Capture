@@ -57,6 +57,11 @@ public class EntityHandler {
             return getMessage().getFormatted(abstractHorse.getJumpStrength());
         } else return null;
     }
+    public boolean isBaby(Entity entity) {
+        if (entity instanceof Ageable ageable) {
+            return !ageable.isAdult();
+        } else return false;
+    }
     public String getColor(Entity entity) {
         return switch (entity) {
             case Axolotl axolotl -> getMessage().toTitleCase(axolotl.getVariant().name());

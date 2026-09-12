@@ -71,6 +71,7 @@ entity:
   SQUID: true
   STRAY: false
   STRIDER: true
+  SULFUR_CUBE: true
   TADPOLE: false
   TRADER_LLAMA: true
   TROPICAL_FISH: false

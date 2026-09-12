@@ -57,10 +57,9 @@ public class MaterialHandler {
                 if (health != null) {
                     stringList.add(getMessage().addColor("&9Health&f: " + health));
                 }
-                var scale = getEntityHandler().getScale(entity);
-                if (scale != null) {
-                    stringList.add(getMessage().addColor("&9Scale&f: " + scale));
-                }
+                if (getEntityHandler().isBaby(entity)) {
+                    stringList.add(getMessage().addColor("&9Age&f: Baby"));
+                } else stringList.add(getMessage().addColor("&9Age&f: Adult"));
                 var profession = getEntityHandler().getProfession(entity);
                 if (profession != null) {
                     stringList.add(getMessage().addColor("&9Profession&f: " + getMessage().toTitleCase(profession)));
